@@ -1,1 +1,1 @@
-#include<A Journey through Junior Training sheet>
+A journey through Junior Training sheet
