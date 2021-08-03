@@ -9,13 +9,24 @@ using LL = long long;
 using ull = unsigned long long int;
 
 void solve(){
-   int n;
-   cout<<24;
+    string s;
+    cin>>s;
+    int n= s.length();
+    char tmp='a';
+    int diff,step=0;
+   for(int i=0;i<n;i++){
+       diff = abs((s[i]-tmp));
+       if(diff>13) step+=26-diff;
+       else step+=diff;
+      // cout<<step<<NL;
+       tmp = s[i];
+   }
+   cout<<step<<NL;
 }
 
 int main()
 {
-  fastio;
-  solve();
-  return Monke;
+    fastio;
+    solve();
+    return Monke;
 }
