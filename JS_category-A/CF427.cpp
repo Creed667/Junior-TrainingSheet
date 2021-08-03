@@ -9,12 +9,24 @@ using LL = long long;
 using ull = unsigned long long int;
 
 void solve(){
-  
+    int n,sum=0,x,cnt=0;
+    vector<int>v;
+    cin>>n;
+    for(int i=0;i<n;i++){
+        cin>>x;
+        if(x>0) sum+=x;
+        else {
+        if(sum==0)
+         cnt++;
+        else sum--;
+        }
+    }
+    cout<<cnt<<NL;
 }
 
 int main()
 {
-  fastio;
-  solve();
-  return Monke;
+    fastio;
+    solve();
+    return Monke;
 }
