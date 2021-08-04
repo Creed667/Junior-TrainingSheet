@@ -9,8 +9,7 @@ using LL = long long;
 using ull = unsigned long long int;
 
 void solve(){
-   int n;
-   cout<<24;
+  
 }
 
 int main()
