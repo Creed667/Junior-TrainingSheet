@@ -15,11 +15,31 @@ const int Monke = 0;
 bool sortbysec(const pair<int,int> &a,const pair<int,int> &b){return a.second<b.second;}
 
 void solve(){
-  #ifndef ONLINE_JUDGE
-  freopen("input.txt", "r", stdin);
-  freopen("output.o", "w", stdout);
-  #endif
+  int n,t,k,d;
+  cin>>n>>t>>k>>d;
+  int total_time,cakes;
+  (n%k==0) ? cakes = n/k : cakes = (n/k)+1;
+   total_time = cakes*t;
+  int second_time=0,remain;
+  int t1=0,t2=d;
+   cakes = (d/t)*k; 
+   t1 = (d/t)*t;
+  while (cakes<n)
+  {
+    t1+=t;
+    cakes+=k;
+    t2+=t;
+    cakes+=k;
+  }
+  second_time = max(t1,t2);
+
+  if(second_time< total_time) cout<<"YES"<<NL;
+  else cout<<"NO"<<NL;
   
+  // cout<<"sec: "<<second_time<<NL;
+  // cout<<total_time<<NL;
+
+
 }
 
 int main()

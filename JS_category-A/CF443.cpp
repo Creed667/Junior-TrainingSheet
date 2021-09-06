@@ -15,11 +15,17 @@ const int Monke = 0;
 bool sortbysec(const pair<int,int> &a,const pair<int,int> &b){return a.second<b.second;}
 
 void solve(){
-  #ifndef ONLINE_JUDGE
-  freopen("input.txt", "r", stdin);
-  freopen("output.o", "w", stdout);
-  #endif
+
+  string s;
+  set<char>s2;
   
+  getline(cin,s);
+ 
+  for(int i=0;i<s.length();i++){
+    if(s[i]>='a' && s[i]<='z') s2.insert(s[i]);
+  }
+  cout<<s2.size()<<NL;
+
 }
 
 int main()
