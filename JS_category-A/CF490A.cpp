@@ -15,24 +15,22 @@ const int Monke = 0;
 bool sortbysec(const pair<int,int> &a,const pair<int,int> &b){return a.second<b.second;}
 
 void solve(){
-  //#ifndef ONLINE_JUDGE
-  //freopen("input.txt", "r", stdin);
-  //freopen("output.o", "w", stdout);
-  //#endif
-  int n,k;
-  vector<char>v;
-  char c='a';
-  cin>>n>>k;
-  forN(k){
-    v.pb(c);
-    c++;
-  }
-  int j=0;
+  int mn,t;
+  vector<int>a,b,c;
+  int n,x;
+  cin>>n;
   forN(n){
-    if(j==v.size()) j=0;
-    cout<<v[j];
-    j++;
+    cin>>x;
+    if(x==1) a.pb(i+1);
+    else if(x==2) b.pb(i+1);
+    else c.pb(i+1);
   }
+  mn = min(min(a.size(),b.size()),c.size());
+  cout<<mn<<NL;
+  forN(mn){
+   cout<<a[i]<<" "<<b[i]<<" "<<c[i]<<NL;
+  }
+
 }
 
 int main()
