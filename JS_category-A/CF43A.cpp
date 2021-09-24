@@ -12,23 +12,26 @@ using namespace std;
 using LL = long long;
 using ull = unsigned long long int;
 const int Monke = 0;
-bool sortbysec(const pair<int,int> &a,const pair<int,int> &b){return a.second<b.second;}
+bool sortbysec(const pair<string,int> &a,const pair<string,int> &b){return a.second<b.second;}
 
 void solve(){
-  int n,k;
-  vector<char>v;
-  char c='a';
-  cin>>n>>k;
-  forN(k){
-    v.pb(c);
-    c++;
+ map<string,int>m;
+ vector<pair<string,int>>v;
+ int n,mxn=-1;
+ cin>>n;
+ string s,x,mx;
+ forN(n){
+   cin>>s;
+   m[s]++;
+ }
+ for(auto i:m) {
+  if(mxn<i.second) {
+    mx = i.first;
+    mxn = i.second;
   }
-  int j=0;
-  forN(n){
-    if(j==v.size()) j=0;
-    cout<<v[j];
-    j++;
-  }
+ }
+
+ cout<<mx<<NL;
 }
 
 int main()

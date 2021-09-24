@@ -15,19 +15,17 @@ const int Monke = 0;
 bool sortbysec(const pair<int,int> &a,const pair<int,int> &b){return a.second<b.second;}
 
 void solve(){
-  int n,k;
-  vector<char>v;
-  char c='a';
-  cin>>n>>k;
-  forN(k){
-    v.pb(c);
-    c++;
+  int n,t;
+  cin>>n>>t;
+  if(n==1 && t==10) cout<<-1<<NL;
+  else if(t==10){
+    cout<<1;
+    forN(n-1) cout<<0;
+    cout<<NL;
   }
-  int j=0;
-  forN(n){
-    if(j==v.size()) j=0;
-    cout<<v[j];
-    j++;
+  else {
+    forN(n) cout<<t;
+    cout<<NL;
   }
 }
 

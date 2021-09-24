@@ -1,38 +1,4 @@
-#include <cmath>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <algorithm>
-#include <bitset>
-#include <complex>
-#include <deque>
-#include <exception>
-#include <fstream>
-#include <functional>
-#include <iomanip>
-#include <ios>
-#include <iosfwd>
-#include <iostream>
-#include <istream>
-#include <iterator>
-#include <limits>
-#include <list>
-#include <locale>
-#include <map>
-#include <memory>
-#include <new>
-#include <ostream>
-#include <queue>
-#include <set>
-#include <sstream>
-#include <stack>
-#include <stdexcept>
-#include <streambuf>
-#include <string>
-#include <typeinfo>
-#include <utility>
-#include <valarray>
-#include <vector>
+#include<bits/stdc++.h>
 
 using namespace std;
 
@@ -61,8 +27,6 @@ long long lcm(LL a,  LL b)
 {
     return (a / gcd(a, b)) * b;
 }
-
-
 
 void solve(){
   LL n2,m,a,d,cnt1,cnt2,cnt3,cnt4,cnt5,ans;
@@ -111,7 +75,6 @@ void solve(){
   (n2%n[2]==0) ? cnt3 = ((m/n[2])-(n2/n[2]))+1 : cnt3 = (m/n[2]) - (n2/n[2]);
   (n2%n[3]==0) ? cnt4 = ((m/n[3])-(n2/n[3]))+1 : cnt4 = (m/n[3]) - (n2/n[3]);
   (n2%n[4]==0) ? cnt5 = ((m/n[4])-(n2/n[4]))+1 : cnt5 = (m/n[4]) - (n2/n[4]);
-
   
   ans = ((m-n2)+1) - ((cnt1+cnt2+cnt3+cnt4+cnt5) - Twosum +Threesum-foursum +fivesum);
 
@@ -129,6 +92,6 @@ int main()
    fastio;
    tc(x)
    solve();
-    cerr<<"Time taken : "<<(float)clock()/CLOCKS_PER_SEC<<" secs"<<endl; cerr<<"Time taken : "<<(float)clock()/CLOCKS_PER_SEC<<" secs"<<endl;
+   cerr<<"Time taken : "<<(float)clock()/CLOCKS_PER_SEC<<" secs"<<endl; cerr<<"Time taken : "<<(float)clock()/CLOCKS_PER_SEC<<" secs"<<endl;
    return Monke;
 }

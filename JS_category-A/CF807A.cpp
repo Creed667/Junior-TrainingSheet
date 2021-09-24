@@ -14,21 +14,27 @@ using ull = unsigned long long int;
 const int Monke = 0;
 bool sortbysec(const pair<int,int> &a,const pair<int,int> &b){return a.second<b.second;}
 
+bool sc(int a,int b) {return a>b;}
+
 void solve(){
-  int n,k;
-  vector<char>v;
-  char c='a';
-  cin>>n>>k;
-  forN(k){
-    v.pb(c);
-    c++;
+  int n;
+  cin>>n;
+  vector<int>v,v2;
+  int x,y,diff=0;
+  forN(n) {
+    cin>>x>>y;
+    if(abs(x-y) !=0) diff=1;
+    v.pb(x);
+    v2.pb(x);
   }
-  int j=0;
-  forN(n){
-    if(j==v.size()) j=0;
-    cout<<v[j];
-    j++;
+  sort(all(v2),sc);
+
+  if(diff) cout<<"rated"<<NL;
+  else if(v==v2){
+    cout<<"maybe"<<NL;
   }
+  else cout<<"unrated"<<NL;
+
 }
 
 int main()
