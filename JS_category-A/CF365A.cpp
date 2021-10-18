@@ -15,23 +15,31 @@ const int Monke = 0;
 bool sortbysec(const pair<int,int> &a,const pair<int,int> &b){return a.second<b.second;}
 
 void solve(){
-int n,x,x2,a,b;
+  int n,k,x,flag=1,cnt=0;
+  cin>>n>>k;
+  
+  forN(n){
+    cin>>x;
+   flag=1;
+   map<int,int>mp;
+   while (x!=0)
+   {
+     int r = x%10;
+     mp[r] =1;
+    x/=10;
+   }
 
-int f =1;
-
-cin>>n>>x;
-x2 = 7-x;
-for(int i=0;i<n;i++){
-    cin>>a>>b;
-    if(a==x || a==x2 || b==x || b==x2) f=0;
-}
-if(f) cout<<"YES"<<NL;
-else cout<<"NO"<<NL;
+   for(int j=0;j<=k;j++){
+     if(mp[j]!=1) flag =0;
+   }
+   if(flag) cnt++;
+  }
+  cout<<cnt<<NL;
 }
 
 int main()
 {
-    fastio;
-    solve();
-    return Monke;
+  fastio;
+  solve();
+  return Monke;
 }
