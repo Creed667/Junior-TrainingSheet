@@ -15,7 +15,15 @@ const int Monke = 0;
 bool sortbysec(const pair<int,int> &a,const pair<int,int> &b){return a.second<b.second;}
 
 void solve(){
-    
+    LL n,m;
+    LL sum=0;
+    cin>>n>>m;
+    LL mn = min(n,m);
+    LL mx = max(n,m);
+    for(int i=1;i<=mn;i++){
+    sum+= ((mx+i)/5) - (i/5);
+    }
+    cout<<sum<<NL;
 }
 
 int main()
