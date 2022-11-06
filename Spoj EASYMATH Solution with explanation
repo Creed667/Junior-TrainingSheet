@@ -1,0 +1,136 @@
+SPOJ – EASYMATH Solution With Explanation
+
+SPOJ – EASYMATH is an amazing math problem on the Sphere Online Judge. The problem statement is pretty easier to understand. you can read the problem statement here: https://www.spoj.com/problems/EASYMATH
+
+
+SPOJ – EASYMATH solution explanation with brute force method
+Before going to the tutorial, I should encourage you to try it yourself with some hints. You can check solution below after trying out yourself.
+
+Let us first think about a brute force solution which takes only few lines of code (C++ code).
+
+#include<bits/stdc++.h>
+using namespace std;
+
+void solve()
+{
+  int a,d,n,m,cnt=0;
+   cin>>n>>m>>a>>d;
+  for(int i=n;i<=m;i++)
+  {
+   if(i%a==0 || i%(a+d)==0 || i%(a+(2*d))==0 || i%(a+(3*d))==0 || i%(a+(4*d))==0 )
+      continue;
+   cnt++;
+  }
+  cout<<cnt<<endl;
+}
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--) solve();
+    return 0;
+}
+The problem with this solution is that, the constrain of and n and m is 1 <= n <= m <= 232, where if n=1 and m=232 then loop will take a lots of time and will give you Time Limit Exceed (TLE) verdict. So, we need to think about this mathematically and solve it without using loops.
+
+Explanation of SPOJ EASYMATH Mathematically
+First, let us think about, how many numbers are there between 1 to 20 not divisible by 5?
+Now it’s easy to count haw many are divisible by 5. There are four of them between 1 to 20 that are divisible by 5, which are 5,10,15,20 or we can also directly count floor(20/5) = 4 (it must be only integer). so if we substract 4 from 20 we get 16, answer to our question.
+Now, how many numbers are there between 10 to 20 not divisible by 5?
+If we exclude 10,15 and 20 we can get the answer (numbers between 20 to 10 inclusive are 11) 11- (number of multiples of 5 ) 3 = 8.
+so we need to eliminate numbers<=20 which are divisible by 5 – numbers<=10 which are divisible by 5 between the range of 10 to 20 which is (20-10 +1) =11.
+Note that, as the 10 is inclusive and divisible by 5, so we need to add 1 with the answer.
+an easy equation should be,
+( 20-10+1 ) – { (20/5) – ( 10/5) +1 }
+= 11 – (4-2+1) = 8
+If instead of 10 the we use 11, as 11 is not divisible by 5, we don’t need to add 1. then the equation:
+( 20-11+1 ) – { (20/5) – ( 11/5) }
+= 10 – (4 -2) = 8
+Now if we convert the equation with variable we get
+( m-n+1 ) – { (m/a) – (n/a) +1 } when n is divisible by a.
+( m-n+1 ) – { (m/a) – (n/a) } when n is not divisible by a.
+So, until now we’ve figured out to get how many numbers are not divisible by a specific number between a range. But our main problem requires us to find out how numbers are not divisible by five numbers between a range. This can be a problem if we only follow the equation for only a single number.
+Let us take an example: How many numbers are there between 1 to 10 that are not divisible by 2 or 3?
+a naive perspective would be like adding both 3’s and 2’s number of multiples between 1 to 10 and substracting from the total numbers.
+(10-1+1) – [ { (10/2) – (1/2) } + { (10/3) – (1/3)} ] (Note: here 1/2 or 1/3 =0 and 10/3 = 3 as integer)
+=> 10 – [ { 5 – 0} + { 3 – 0} ]=> 10 – [5 + 3]=> 2
+But if we count manually we get 1, 5, 7 that means 3 numbers which are not divisible by 2 or 3 between 1 to 10. So where is the wrong step here? It’s pretty easy, 6 is both divisible by 2 and 3. So we are counting 6 both in number 2’s multiples and 3’s multiples which is counted two times and deleting it from the range. And as you can see 6 is the LCM (Least Common Multiple) of 2 and 3. So we need substract the number of multiples of 6 between the range from counting part.
+so the correct equation should be:
+(10-1+1) – [ { (10/2) – (1/2) } + { (10/3) – (1/3)} – { (10/6) – (1/6) }]
+=> 10 – [ 5 + 3 – 1]=> 10 – 7
+=> 3
+
+We used a method here, which is Principle of Inclusion and exclusion (PIE) that we learned from the set theory. as the formula is
+
+$|A_1 \cup A_2| = |A_1| + |A_2| - |A_1\cap A_2|$
+Where we included 2 and 3’s multiple and excluded 6’s multiples from above problem.
+
+You can learn Principle of Inclusion and exclusion (PIE) from here:
+https://artofproblemsolving.com/wiki/index.php/Principle_of_Inclusion-Exclusion
+
+In the main problem, there five numbers a, a+d, a+2d, a+3d, a+4d. so we need to use Five Set Example from the article.
+as we have five numbers, we need include and exclude LCM(a,a+d), LCM( a, a+2d ), LCM( a, a+3d )…..LCM( a, a+d, a+2d)……LCM( a, a+d, a+2d, a+3d, a+4d). If you take a notice, this actually indicated all possible subsets which can be made with elements a, a+d, a+2d, a+3d, a+4d. by which you include and exclude all the LCMs of the numbers that are being counted multiple times in the equation.
+
+SPOJ – EASYMATH solution Code in C++
+
+#include<bits/stdc++.h>
+using namespace std;
+long long gcd(long long int a, long long int b)
+{
+  if (b == 0)
+    return a;
+  return gcd(b, a % b);
+}
+ 
+long long lcm(long long a,  long long b)
+{
+    return (a / gcd(a, b)) * b;
+}
+
+void solve(){
+    long long n,m,a,d,lc;
+    cin>>n>>m>>a>>d;
+    long long divisorSets[5];
+    for(int i=0;i<5;i++) {
+        //making sets of a,a+d,a+2d,a+3d,a+4d
+        divisorSets[i] = a+(i*d); 
+    }
+    long long sum=0,sum2=0,sum3=0,ans;
+    //generating all possible subset 
+    for(int mask = 1; mask < (1 << 5); mask++){  
+        vector<int>subset;
+        for(int i = 0; i < 5; i++) {
+            if(mask & (1 << i)) { 
+                subset.push_back(divisorSets[i]); 
+            }
+        }
+       lc = subset[0];
+       for(int j=0;j<subset.size();j++){
+        //counting lcm of subsets
+        lc = lcm(lc,subset[j]); 
+       }
+       //applying formula
+      (n%lc==0)  ? sum2 += ((m/lc)-(n/lc))+1 : sum2 += (m/lc) - (n/lc); 
+       //excluding even elements subset 
+      if(subset.size() %2 == 0) sum-=sum2;
+      //including odd elements subset 
+      else sum +=sum2; 
+      //applying PIE method of set 
+      sum2 =0;
+    }
+  
+    ans = ((m-n)+1) - sum; 
+    cout<<ans<<NL;
+}
+
+int main()
+{
+   int t;
+    cin>>t;
+    while(t--) solve();
+    return 0;
+
+}
+Here I used bitmasking for generating subsets. The following code snippet is generating all possible subsets from the divisorSets vector and pushing each subset to the subset vector and counting the sum to delete from the range in the end.
+
+The problem is pretty interesting and can boost programmer’s mathematical knowledge.
